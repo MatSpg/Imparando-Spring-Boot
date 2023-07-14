@@ -6,6 +6,7 @@
     <title>Spring Boot Home</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/home.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav>
@@ -14,10 +15,24 @@
     </nav>
 
     <div class="container">
-        <ul>
-            <li>Prova</li>
-            <li>Prova</li>
+        <ul id="list">
+            <!-- Lista dinamica -->
         </ul>
     </div>
+
+    <script>
+        $.ajax({
+            url: "/api/frasi",
+            method: "GET",
+            success: function(data) {
+                data.forEach(element => {
+                    var create = document.createElement("li")
+                    create.textContent = "ID: "+element.id+" | Frase: "+element.frase;
+                    $("#list").append(create)
+                    console.log("Aggiunto")
+                });
+            }
+        })
+    </script>
 </body>
 </html>

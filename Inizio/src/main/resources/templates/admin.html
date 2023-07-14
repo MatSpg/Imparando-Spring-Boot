@@ -6,6 +6,7 @@
     <title>Spring Boot Admin</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav>
@@ -14,22 +15,26 @@
     </nav>
 
     <div class="container">
-        <ul>
-            <li>
-                Prova 
-                <div>
-                    <button>Modifica</button>
-                    <button>Cancella</button>
-                </div>
-            </li>
-            <li>
-                Prova 
-                <div>
-                    <button>Modifica</button>
-                    <button>Cancella</button>
-                </div>
-            </li>
+        <button>Aggiungi Frase</button>
+        <ul id="list">
+            <!-- Lista Dinamica -->
         </ul>
     </div>
+    
+    <script>
+        $.ajax({
+            url: "/api/frasi",
+            method: "GET",
+            success: function(data) {
+                data.forEach(element => {
+                    var create = document.createElement("li")
+                    create.textContent = "ID: "+element.id+" | Frase: "+element.frase;
+                    create.innerHTML += "<div><button>Modifica</button><button>Cancella</button></div>"
+                    $("#list").append(create)
+                    console.log("Aggiunto")
+                })
+            }
+        })
+    </script>
 </body>
 </html>
