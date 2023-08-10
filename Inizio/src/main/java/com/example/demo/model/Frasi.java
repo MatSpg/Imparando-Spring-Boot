@@ -21,9 +21,7 @@ public class Frasi {
 		this.frase = frase;
 	}
 	
-	public Frasi() {
-		
-	}
+	public Frasi() {}
 	
 	public Frasi(int id, String frase) {
 		this.id = id;

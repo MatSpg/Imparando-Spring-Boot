@@ -32,14 +32,18 @@ public class FrasiController {
 		return list;
 	}
 	
+	// {id} per specificare che il valore e variabile 
 	@RequestMapping("/api/frasi/{id}")
-	public Frasi getById(@PathVariable int id) {
+	public Frasi getById(@PathVariable int id) { // PathVariable permette di prendere il valore di {id} nel url
+		// Permette di cercare la singola frase da restituire
 		Optional<Frasi> frase = list.stream().filter(item->item.getId() == id).findFirst();
 		
+		// S	e non viene trovata nessuna frase con l'id richiesto lo status della richiesta sarà NOT_FOUND
 		if (frase.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Frase non trovata");
 		}
 		
+		// Ritorna la frase che hai trovato con l'id richiesto
 		return frase.get();
 	}
 		
