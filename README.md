@@ -1,6 +1,6 @@
 # Imparando Spring Boot
 
-In questo repository troverai un progetto basato su Spring Boot un Framework di Java, questo progetto e stato creato per imparare Spring Boot inf atti all'interno troverai la maggior parte dei passaggi con i vari commenti
+In questo repository troverai un progetto basato su Spring Boot un Framework di Java, questo progetto e stato creato per imparare Spring Boot infatti all'interno troverai la maggior parte dei passaggi con i vari commenti
 
 ## Installazione
 
