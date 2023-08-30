@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 	
+	public AdminController() {}
+	
 	// Permette di gestire le richieste che arrivano al path indicato
 	@RequestMapping("/admin")
 	public String admin() {

@@ -61,3 +61,45 @@ li > div > button:hover {
     cursor: pointer;
     background-color: #1e1e1e;
 }
+
+.prompt {
+    position: absolute;
+    display: none;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 25%;
+    height: 25vh;
+    background-color: #000;
+    border: 1px solid #fff;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    padding: 0.5vh 1.5vw;
+}
+
+.prompt > input {
+    width: 100%;
+    height: 20%;
+}
+
+.prompt > button {
+    width: 100%;
+    height: 20%;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #fff;
+    outline: none;
+    transition: 250ms all;
+}
+
+.prompt > button:hover {
+    cursor: pointer;
+    background-color: #1e1e1e;
+}
+
+.prompt > h4 h5 {
+    padding: 0.5vh 0;
+}

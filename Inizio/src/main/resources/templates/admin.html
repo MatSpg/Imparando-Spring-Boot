@@ -15,25 +15,115 @@
     </nav>
 
     <div class="container">
-        <button>Aggiungi Frase</button>
+        <button id="btnOpen">Aggiungi Frase</button>
         <ul id="list">
             <!-- Lista Dinamica -->
         </ul>
     </div>
+
+    <div class="prompt" id="addContainer">
+        <h3>Aggiungi una Frase</h3>
+        <input id="inputAdd" type="text" placeholder="Inserisci Frase...">
+        <button id="btnSendAdd">Invia</button>
+        <button id="btnClose">Chiudi</button>
+    </div>
+
+    <div class="prompt" id="modifyContainer">
+        <h3>Modifica una Frase</h3>
+        <h4 id="textId">ID: </h4>
+        <input id="inputModify" type="text" placeholder="Inserisci Frase...">
+        <button id="btnSendModify">Invia</button>
+        <button id="btnCancel">Annulla</button>
+    </div>
     
     <script>
-        $.ajax({
-            url: "/api/frasi",
-            method: "GET",
-            success: function(data) {
-                data.forEach(element => {
-                    var create = document.createElement("li")
-                    create.textContent = "ID: "+element.id+" | Frase: "+element.frase;
-                    create.innerHTML += "<div><button>Modifica</button><button>Cancella</button></div>"
-                    $("#list").append(create)
-                    console.log("Aggiunto")
-                })
-            }
+        // Funzione per prendere tutte le frasi della lista
+        
+        function getFrasi() {
+            $.ajax({
+                url: "/admin/api/frasi",
+                method: "GET",
+                success: function(data) {
+                    $("#list").html("")
+                    data.forEach(element => {
+                        var create = document.createElement("li")
+                        create.textContent = "ID: "+element.id+" | Frase: "+element.frase;
+                        create.innerHTML += '<div><button id="btnModify" data-id="'+element.id+'">Modifica</button><button id="btnDelete" data-id="'+element.id+'">Cancella</button></div>'
+                        $("#list").append(create)
+                    })
+                    console.log("Lista Aggiornata")
+                }
+            })
+        }
+
+        getFrasi()
+
+        // Pop-Up per creare la frase
+
+        $("#btnOpen").click(function() {
+            $("#addContainer").css("display", "flex")
+        })
+
+        $("#btnClose").click(function() {
+            $("#addContainer").css("display", "none")
+        })
+
+        $("#btnSendAdd").click(function() {
+            let textAdd = $("#inputAdd").val()
+            $.ajax({
+                url: "/admin/api/frasi",
+                method: "POST",
+                data: JSON.stringify({"frase": textAdd}),
+                contentType: "application/json",
+                success: function(data) {
+                    $("#addContainer").css("display", "none")
+                    $("#inputAdd").val("")
+                    getFrasi()
+                    console.log("Aggiunta nuova frase: "+textAdd)
+                }
+            })
+        })
+
+        // Pop-Up per modificare la frase
+
+        var id;
+        $("#list").on("click", "#btnModify", function() {
+            id = $(this).data("id")
+            $("#textId").html("ID: "+id)
+            $("#modifyContainer").css("display", "flex")
+        })
+
+        $("#btnCancel").click(function() {
+            $("#modifyContainer").css("display", "none")
+        })
+
+        $("#btnSendModify").click(function() {
+            let textModify = $("#inputModify").val()
+            $.ajax({
+                url: "/admin/api/frasi/"+id,
+                method: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify({"frase": textModify}),
+                success: function(data) {
+                    $("#modifyContainer").css("display", "none")
+                    $("#inputModify").val("")
+                    getFrasi()
+                    console.log("Frase con id "+ id +" aggiornata con successo.")
+                }
+            })
+        })
+
+        // Eliminare una frase
+
+        $("#list").on("click", "#btnDelete", function() {
+            $.ajax({
+                url: "/admin/api/frasi/"+$(this).data("id"),
+                method: "DELETE",
+                success: function(data) {
+                    getFrasi()
+                    console.log("Frase è stata cancellata.")
+                }
+            })
         })
     </script>
 </body>
