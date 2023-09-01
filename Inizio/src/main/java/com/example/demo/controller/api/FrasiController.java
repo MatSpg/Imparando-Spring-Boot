@@ -3,6 +3,7 @@ package com.example.demo.controller.api;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,13 +12,15 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.model.Frasi;
 import com.example.demo.service.FrasiService;
+import com.example.demo.service.IFrasiService;
 
 @RestController
 public class FrasiController {
 	
 	// Dependency Injection
 	@Autowired
-	private FrasiService frasiService;
+	@Qualifier("dbFrasiService")
+	private IFrasiService frasiService;
 	
 	public FrasiController() {
 		frasiService = new FrasiService();

@@ -103,7 +103,7 @@
                 url: "/admin/api/frasi/"+id,
                 method: "PUT",
                 contentType: "application/json",
-                data: JSON.stringify({"frase": textModify}),
+                data: textModify,
                 success: function(data) {
                     $("#modifyContainer").css("display", "none")
                     $("#inputModify").val("")

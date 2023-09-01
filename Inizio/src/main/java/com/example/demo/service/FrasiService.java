@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Frasi;
 
-@Service
-public class FrasiService {
+// Per dare uno nome specifico al service per richiamarlo attraverso la dipendency injection
+@Service("listFrasiService")
+public class FrasiService implements IFrasiService {
 	
 	private List<Frasi> list;
 	private int lastId; 
@@ -26,10 +27,12 @@ public class FrasiService {
 		lastId = lastIndex.getId();
 	}
 	
+	@Override
 	public Iterable<Frasi> getAll(){
 		return list;
 	}
 	
+	@Override
 	public Optional<Frasi> getById(int id) {
 		// Permette di cercare la singola frase da restituire
 		Optional<Frasi> frase = list.stream().filter(item->item.getId() == id).findFirst();
@@ -38,6 +41,7 @@ public class FrasiService {
 		return frase;
 	}
 	
+	@Override
 	public Frasi create(Frasi frase) {
 		// Prende l'ultimo id della lista e lo incrementa di 1
 		lastId++;
@@ -50,7 +54,8 @@ public class FrasiService {
 		return frase;
 	}
 
-	public Optional<Frasi> update(int id, Frasi frase) {
+	@Override
+	public Optional<Frasi> update(int id, String frase) {
 		// Permette di cercare la singola frase da restituire
 		Optional<Frasi> foundFrase = list.stream().filter(item->item.getId() == id).findFirst();
 		
@@ -60,12 +65,13 @@ public class FrasiService {
 		}
 		
 		// Prende la frase trovata con l'id richiesto, cambia la frase con quella richiesta.
-		foundFrase.get().setFrase(frase.getFrase());
+		foundFrase.get().setFrase(frase);
 		
 		// Ritorna la frase che è stata modificata
 		return foundFrase;
 	}
 	
+	@Override
 	public Boolean delete(int id) {
 		// Permette di cercare la singola frase da eliminare
 		Optional<Frasi> foundElement = list.stream().filter(item->item.getId() == id).findFirst();
