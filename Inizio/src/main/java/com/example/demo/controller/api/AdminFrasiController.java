@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.model.Frasi;
-import com.example.demo.service.FrasiService;
 import com.example.demo.service.IFrasiService;
 
 @RestController
