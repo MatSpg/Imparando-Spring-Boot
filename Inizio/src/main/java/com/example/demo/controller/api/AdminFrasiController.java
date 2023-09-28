@@ -15,6 +15,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.demo.model.Frasi;
 import com.example.demo.service.IFrasiService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class AdminFrasiController {
 	
@@ -47,7 +49,7 @@ public class AdminFrasiController {
 	
 	// Aggiungere una frase, value = url della richiesta mentre method = il metodo della richiesta in questo caso RequestMethod.POST
 	@RequestMapping(value="/admin/api/frasi", method = RequestMethod.POST)
-	public Frasi create(@RequestBody Frasi frase) {
+	public Frasi create(@Valid @RequestBody Frasi frase) {
 		return frasiService.create(frase);
 	}
 	

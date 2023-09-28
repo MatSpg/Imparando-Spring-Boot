@@ -7,7 +7,7 @@ In questo repository troverai un progetto basato su Spring Boot un Framework di 
 Utilizza [git](https://git-scm.com/) per esportare sul tuo dispositivo la seguente repository.
 
 ```git
-git pull https://github.com/MatSpg/Esercizi-Java.git
+git pull https://github.com/MatSpg/Imparando-Spring-Boot.git
 ```
 
 Per utilizzare Spring Boot portai scaricare [Spring Tools 4](https://spring.io/tools/) un ambiente di sviluppo creato apposta per le applicazioni Spring-based

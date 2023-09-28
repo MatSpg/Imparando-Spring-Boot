@@ -1,9 +1,12 @@
 package com.example.demo.model;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Frasi {
@@ -13,6 +16,8 @@ public class Frasi {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@NotBlank(message = "Questo campo non può essere vuoto")
+	//@Length(min = 3, message = "La frase inserita e troppo corta")
 	private String frase;
 	
 	public int getId() {

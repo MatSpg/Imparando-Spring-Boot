@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+
 @Service
 public class MockUserDetailsService implements UserDetailsService{
 
